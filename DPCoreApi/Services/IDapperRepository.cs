@@ -9,8 +9,8 @@ namespace DPCoreApi.Services
 {
     public interface IDapperRepository
     {
-        T execute_sp<T>(string sp, DynamicParameters sp_params, CommandType commandType = CommandType.StoredProcedure);
-        List<T> GetAll<T>(string sp, DynamicParameters sp_params, CommandType commandType = CommandType.StoredProcedure);
+        T execute_sp<T>(string query, DynamicParameters sp_params, CommandType commandType = CommandType.StoredProcedure);
+        List<T> GetAll<T>(string query, DynamicParameters sp_params, CommandType commandType = CommandType.StoredProcedure);
 
     }
 }

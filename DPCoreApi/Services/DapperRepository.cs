@@ -18,13 +18,13 @@ namespace DPCoreApi.Services
             _configuration = configuration;
         }
 
-        public List<T> GetAll<T>(string sp, DynamicParameters sp_params, CommandType commandType = CommandType.StoredProcedure)
+        public List<T> GetAll<T>(string query, DynamicParameters sp_params, CommandType commandType = CommandType.StoredProcedure)
         {
             using IDbConnection db = new SqlConnection(_configuration.GetConnectionString("default"));
-            return db.Query<T>(sp, sp_params, commandType: commandType).ToList();
+            return db.Query<T>(query, sp_params, commandType: commandType).ToList();
         }
 
-        public T execute_sp<T>(string sp, DynamicParameters sp_params, CommandType commandType = CommandType.StoredProcedure)
+        public T execute_sp<T>(string query, DynamicParameters sp_params, CommandType commandType = CommandType.StoredProcedure)
         {
             T result;
 
@@ -35,7 +35,7 @@ namespace DPCoreApi.Services
                 using var transaction = dbConnection.BeginTransaction();
                 try
                 {
-                    dbConnection.Query<T>(sp, sp_params, commandType: commandType, transaction: transaction);
+                    dbConnection.Query<T>(query, sp_params, commandType: commandType, transaction: transaction);
 
                     result = sp_params.Get<T>("retVal"); //get output parameter value
 
