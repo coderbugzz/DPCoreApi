@@ -24,6 +24,12 @@ namespace DPCoreApi.Services
             return db.Query<T>(query, sp_params, commandType: commandType).ToList();
         }
 
+        public T GetByID<T>(string query, DynamicParameters sp_params, CommandType commandType = CommandType.StoredProcedure)
+        {
+            using IDbConnection db = new SqlConnection(_configuration.GetConnectionString("default"));
+            return db.Query<T>(query, sp_params, commandType: commandType).FirstOrDefault();
+        }
+
         public T execute_sp<T>(string query, DynamicParameters sp_params, CommandType commandType = CommandType.StoredProcedure)
         {
             T result;

@@ -46,7 +46,15 @@ namespace DPCoreApi.Controllers
             return result;
         }
 
-        [HttpPost(nameof(Update))]
+        [HttpGet(nameof(GetMembersById))]
+        public async Task<member> GetMembersById(int Id)
+        {
+            var result = await Task.FromResult(_repository.GetByID<member>($"Select * from [members] where Id = {Id}", null, commandType: CommandType.Text));
+
+            return result;
+        }
+
+        [HttpPut(nameof(Update))]
         public async Task<int> Update(member data)
         {
             var dp_params = new DynamicParameters();

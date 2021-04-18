@@ -11,6 +11,6 @@ namespace DPCoreApi.Services
     {
         T execute_sp<T>(string query, DynamicParameters sp_params, CommandType commandType = CommandType.StoredProcedure);
         List<T> GetAll<T>(string query, DynamicParameters sp_params, CommandType commandType = CommandType.StoredProcedure);
-
+        T GetByID<T>(string query, DynamicParameters sp_params, CommandType commandType = CommandType.StoredProcedure);
     }
 }
